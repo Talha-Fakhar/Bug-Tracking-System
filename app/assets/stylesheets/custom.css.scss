@@ -1,0 +1,122 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.navbar {
+  background-color: #6c757d;
+  border: none;
+  color: #fff;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  color: #d1d1d1;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.navbar-nav .nav-link.active {
+  color: #60d4e4; 
+}
+
+.navbar-nav .nav-link:hover {
+  color: #cfd9e2;
+}
+
+.navbar-nav .dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+  color: #333;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.navbar-toggler {
+  border-color: #ffffff;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,..."); 
+}
+
+.navbar-form {
+  margin-top: 5px;
+}
+
+.form-control {
+  border-radius: 4px;
+}
+
+.btn-outline-success {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+}
+
+.navbar-nav .nav-item .dropdown-toggle::after {
+  border-top: .3em solid #fff; 
+}
+
+.well a{
+  color:#073b15;
+}
+
+
+.project-title {
+  color: #073b15;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.card-header {
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.btn {
+  border-radius: 0.25rem;
+}
+
+.btn-warning {
+  background-color: #ec0b0b;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #1e6bbd;
+  border: none;
+}
+
+.shadow-lg {
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.card-body {
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  color: #343a40;
+}
+
+

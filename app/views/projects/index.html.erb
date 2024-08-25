@@ -1,0 +1,22 @@
+<h1 class="text-center mb-4">Projects</h1>
+<hr />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <% @projects.each do |project| %>
+      <div class="col-md-8 mb-4">
+        <div class="card shadow-sm" style="background-color: #f2f2f2; border-radius: 10px;">
+          <div class="card-body">
+            <%= link_to project, class: 'text-decoration-none text-dark' do %>
+              <h4 class="card-title mb-3" style="font-weight: bold;"><%= project.name.capitalize %></h4>
+              <p class="card-text text-secondary mb-2"><%= truncate(project.description, length: 150) %></p>
+              <p class="card-text">
+                <small class="text-muted">Created <%= time_ago_in_words(project.created_at) %> ago</small>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

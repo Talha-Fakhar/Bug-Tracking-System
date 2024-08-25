@@ -1,0 +1,11 @@
+<%= link_to 'Back', projects_path, class: 'btn btn-secondary mb-4' , style: ' color:white' %>
+<div class="card">
+  <div class="card-body">
+    <div align = "center">
+      <h1><%= Project%></h1>
+    </div>
+    <hr />
+    <%= render 'form', project: @project %>
+
+  </div>
+</div>

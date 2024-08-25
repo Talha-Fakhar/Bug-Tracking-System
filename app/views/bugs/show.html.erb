@@ -1,0 +1,71 @@
+<div class="card border-primary mb-3 shadow-lg">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">Bug Details</h2>
+    <div>
+      <% if current_user.user_type == 'qa' %>
+        <%= link_to 'Edit', edit_project_bug_path(@bug.project, @bug), class: 'btn btn-warning btn-sm mr-2', style: 'color:white;' %>
+        <%= link_to 'Delete', [@bug.project, @bug], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning btn-sm', style: 'color:white;' %>
+      <% end %>
+      <% if current_user.user_type == 'developer' %>
+        <%= link_to 'Edit', edit_project_bug_path(@bug.project, @bug), class: 'btn btn-warning btn-sm mr-2', style: 'color:white;' %>
+        <%= link_to 'Assign To Me', assign_bug_path(@bug.project, @bug), method: :patch, class: 'btn btn-warning btn-sm', style: 'color:white;' %>
+      <% end %>
+      <% if current_user.user_type == 'manager' %>
+        <%= link_to 'Edit', edit_project_bug_path(@bug.project, @bug), class: 'btn btn-warning btn-sm mr-2', style: 'color:white;' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th scope="row" class="col-sm-3">Title:</th>
+          <td class="col-sm-9"><%= @bug.title.capitalize %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="col-sm-3">Status:</th>
+          <td class="col-sm-9">
+            <span class="badge <%= badge_class_for_status(@bug.status) %>">
+              <%= @bug.status.capitalize %>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="col-sm-3">Bug Type:</th>
+          <td class="col-sm-9">
+            <span class="badge <%= badge_class_for_bug_type(@bug.bug_type) %>">
+              <%= @bug.bug_type.capitalize %>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="col-sm-3">Deadline:</th>
+          <td class="col-sm-9"><%= @bug.deadline.present? ? @bug.deadline.strftime("%d %b, %Y %I:%M %p") : "No Deadline" %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="col-sm-3">Assigned To:</th>
+          <td class="col-sm-9">
+            <% if @bug.user %>
+              <%= @bug.user.name.capitalize %>
+            <% else %>
+              Unassigned
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="col-sm-3">Screenshot:</th>
+          <td class="col-sm-9">
+            <% if @bug.screenshot.present? %>
+              <%= link_to @bug.screenshot.url, target: "_blank" do %>
+                <%= @bug.screenshot.identifier %> (Click to view)
+              <% end %>
+            <% else %>
+              No screenshot available
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

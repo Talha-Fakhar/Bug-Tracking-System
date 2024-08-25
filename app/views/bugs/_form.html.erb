@@ -1,0 +1,62 @@
+<%= render 'shared/errors', obj: @bug %>
+
+<div class="col-md-12">
+
+  <%= form_for([@bug.project, @bug]) do |f| %>
+
+    <% if current_user.user_type == 'developer' %>
+      <div class="form-group mb-4">
+        <%= f.label :status, class: 'form-label fw-bold' %>
+        <%= f.select :status, Bug::STATUS_OPTIONS, {}, class: 'form-control' %>
+      </div>
+    <%elsif current_user.user_type == 'manager' %>
+      <div class="form-group mb-4">
+        <%= f.label :user_id, class: 'form-label fw-bold' %>
+        <%= f.collection_select :user_id, @project.users.where(user_type: 'developer'), :id, :name, { include_blank: 'Select a developer' }, { class: 'form-control' } %>
+      </div>
+    <% else %>
+      <div class="form-group mb-4">
+        <%= f.label :title, class: 'form-label fw-bold' do %>
+          Title <span class="text-danger">*</span>
+        <% end %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter bug's name" %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= f.label :status, class: 'form-label fw-bold' do %>
+          Status <span class="text-danger">*</span>
+        <% end %>
+        <%= f.select :status, Bug::STATUS_OPTIONS, {include_blank: 'Select a status'}, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= f.label :bug_type, class: 'form-label fw-bold' do %>
+          Bug Type <span class="text-danger">*</span>
+        <% end %>
+        <%= f.select :bug_type, Bug::TYPE_OPTIONS, {include_blank: 'Select a bug type'}, class: 'form-control' %>
+      </div>
+
+
+      <div class="form-group mb-4">
+        <%= f.label :deadline, class: 'form-label fw-bold' %>
+        <%= f.datetime_select :deadline, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= f.label :screenshot, class: 'form-label fw-bold' %>
+        <%= f.file_field :screenshot, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= f.label :user_id, class: 'form-label fw-bold' %>
+        <%= f.collection_select :user_id, @project.users.where(user_type: 'developer'), :id, :name, { include_blank: 'Select a developer' }, { class: 'form-control' } %>
+      </div>
+    <% end %>
+
+    <div class="form-group mt-4">
+      <%= f.submit class: 'btn btn-primary btn-lg w-100' %>
+    </div>
+
+  <% end %>
+
+</div>

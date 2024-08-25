@@ -1,0 +1,60 @@
+<%= link_to 'Back', @project, class: 'btn btn-secondary mb-4', style: 'color: white;' %>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title mb-5 text-center text-light bg-dark p-3 rounded" style="font-weight: bold;">Editing Project</h2>
+
+    <%= form_for(@project) do |form| %>
+      <% if @project.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <ul>
+            <% @project.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field form-group mb-4">
+        <%= form.label :name, class: 'form-label', style: 'font-weight: 430; font-size: 16px;' %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="field form-group mb-4">
+        <%= form.label :description, class: 'form-label', style: 'font-weight: 430; font-size: 16px;' %>
+        <%= form.text_area :description, class: 'form-control' %>
+      </div>
+
+      <div class="field mb-4">
+        <%= form.label :users, class: 'form-label', style: 'font-weight: 430; font-size: 16px;' %>
+        <div class="card shadow-sm">
+          <table class="card-table table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">User Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% User.all.each do |user| %>
+                <tr>
+                  <td><%= check_box_tag "projects_users[user_id][]", user.id, @project.users.include?(user) %></td>
+                  <td><%= user.name.capitalize %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.user_type.capitalize %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="actions mt-4">
+        <%= form.submit class: 'btn btn-primary mt-1', style: 'color: white;' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

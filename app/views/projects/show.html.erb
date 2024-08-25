@@ -1,0 +1,87 @@
+<h1 align = "center"><%= @project.name %></h1>
+<hr />
+
+<div class="container mt-5 pt-4">
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="card-title d-flex justify-content-between align-items-center mb-4">
+        <span>Description</span>
+        <div>
+          <% if can? :update, @project %>
+            <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-warning me-2', style: 'color: white;' %>
+          <% end %>
+          <% if can? :delete, @project %>
+            <%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning', style: 'color: white;' %>
+          <% end %>
+        </div>
+      </h2>
+      <div class="card bg-light p-3">
+        <h5><%= @project.description %></h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="mb-3">Users:</h3>
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">User Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.users.each do |user_in| %>
+            <% if user_in.persisted? %>
+              <tr>
+                <td><%= user_in.name.capitalize %></td>
+                <td><%= user_in.email %></td>
+                <td><%= user_in.user_type.capitalize %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3>Listing Bugs</h3>
+      <% if can? :create, @bug %>
+        <%= link_to 'Add New Bug', new_project_bug_path(@project.id), class: 'btn btn-primary', style: 'color: white;' %>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Bug Type</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Developer</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.bugs.each do |bug| %>
+            <% if bug.persisted? %>
+              <tr>
+                <td><%= bug.title.capitalize %></td>
+                <td><%= bug.status.capitalize %></td>
+                <td><%= bug.bug_type.capitalize %></td>
+                <td><%= bug.deadline.present? ? bug.deadline.strftime("%d %b, %Y %I:%M %p") : "No Deadline" %></td>
+                <td><%= bug.user.present? ? bug.user.name : "Unassigned" %></td>
+                <td><%= link_to 'Open', [bug.project, bug], class: 'btn btn-link text-decoration-none', style: 'color: blue;' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
